@@ -1,60 +1,36 @@
 <template>
   <div class="container">
-    <el-row>
-      <!--背景图片-->
-      <el-col :span="16">
-        <el-image :src="require('./assets/background.svg')" />
-      </el-col>
-      <el-col :span="6">
-        <div>
-          <!--系统简介-->
-          <div>
-            <div>
-              <a href="/">
-                <el-image :src="require('@/assets/logo.png')" />
-                <span>新华手术器械</span>
-              </a>
-            </div>
-            <div>
-              手术器械OA平台
-            </div>
-          </div>
-
-          <!--登录表单-->
-          <div>
-            <el-form>
-              <!--登陆选项-->
-              <el-tabs>
-                <!--账号或手机号登录-->
-                <el-tab-pane label="密码登录">
-                  <account-login />
-                </el-tab-pane>
-
-                <!--企业微信扫码登录-->
-                <el-tab-pane label="扫码登录" disabled>
-                </el-tab-pane>
-              </el-tabs>
-
-              <!--自动登录-->
-              <el-form-item>
-                <el-checkbox checked>自动登录</el-checkbox>
-              </el-form-item>
-
-              <!--登录按钮-->
-              <el-form-item>
-                <el-button type="primary">登录</el-button>
-              </el-form-item>
-            </el-form>
-          </div>
+    <div class="main">
+      <div class="form">
+        <div class="form-header">
+          <a href="/">
+            <el-image :src="require('@/assets/logo.png')" class="logo" />
+            <span class="title">手术器械</span>
+          </a>
+          <div class="desc">手术器械OA平台</div>
         </div>
-      </el-col>
-    </el-row>
-    <el-row class="footer">
-      <!--页脚-->
-      <div>
-        Copyright &copy; 2023 <a href="https://www.wantedalways.cn" target="_blank">Wantedalways</a> 出品
+        <div class="form-main">
+          <el-form>
+            <el-tabs class="type" stretch>
+              <el-tab-pane label="密码登录">
+                <account-login />
+              </el-tab-pane>
+              <el-tab-pane label="扫码登录" disabled>
+              </el-tab-pane>
+            </el-tabs>
+            <el-form-item>
+              <el-checkbox checked>自动登录</el-checkbox>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" class="login-button">登录</el-button>
+            </el-form-item>
+          </el-form>
+        </div>
       </div>
-    </el-row>
+    </div>
+    <div class="footer">
+      Copyright &copy; 2023 <a href="https://www.wantedalways.cn" target="_blank">Wantedalways</a> 出品
+    </div>
   </div>
 </template>
 
@@ -63,13 +39,80 @@ import AccountLogin from "@/views/login/AccountLogin.vue";
 
 export default {
   name: "Login",
-  components: {AccountLogin}
+  components: {AccountLogin},
+  data() {
+    return {
+
+    }
+  }
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   .container {
     height: 100%;
     position: relative;
+    display: -webkit-flex;
+    flex-direction: column;
+    justify-content: center;
   }
+
+  .main {
+    background: url(~@/views/login/assets/background.svg) no-repeat 5%;
+    background-size: 50%;
+    height: 100%;
+    padding: 10%;
+
+    .form {
+      max-width: 350px;
+      position: relative;
+      left: 65%;
+    }
+  }
+
+  .login-button {
+    width: 100%;
+  }
+
+  .type {
+    font-size: 18px;
+  }
+
+  .footer {
+    text-align: center;
+    margin-bottom: 10px;
+    color: rgba(0, 0, 0, 0.45);
+    font-size: 14px;
+  }
+
+  .form-header {
+    text-align: center;
+
+    .logo {
+      height: 70px;
+      vertical-align: bottom;
+      margin-right: 5px;
+    }
+
+    .title {
+      font-size: 20px;
+      color: #304156;
+      font-weight: 600;
+      position: relative;
+      bottom: 10px;
+    }
+
+    .desc {
+      font-size: 15px;
+      color: #304156;
+      font-weight: 300;
+      margin-top: 10px;
+      margin-bottom: 30px;
+    }
+  }
+
+  a {
+    text-decoration: none;
+  }
+
 </style>
