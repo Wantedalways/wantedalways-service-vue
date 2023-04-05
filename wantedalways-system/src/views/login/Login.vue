@@ -62,6 +62,9 @@ export default {
     background-size: 50%;
     height: 100%;
     padding: 10%;
+    display: -webkit-flex;
+    flex-direction: column;
+    justify-content: center;
 
     .form {
       max-width: 350px;
