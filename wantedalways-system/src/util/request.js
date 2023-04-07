@@ -1,5 +1,4 @@
 import axios from "axios";
-import {MessageBox, Message} from "element-ui";
 import Vue from "vue";
 import {ACCESS_TOKEN} from "@/store/mutation-types";
 
@@ -24,7 +23,10 @@ service.interceptors.request.use(config => {
 service.interceptors.response.use(response => {
   return response.data
 }, error => {
-  console.log(error)
+  // 处理异常响应
+  if (error.response) {
+
+  }
 })
 
 export default service;

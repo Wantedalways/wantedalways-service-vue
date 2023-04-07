@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form ref="loginForm" :rules="verifyRules" :model="loginInfo">
+    <el-form ref="loginForm" :rules="verifyRules" :model="loginInfo" @keyup.enter.native="handleLogin">
       <el-form-item prop="account">
         <el-input v-model="loginInfo.account" placeholder="用户账号/手机号" prefix-icon="el-icon-user" clearable />
       </el-form-item>
@@ -30,6 +30,8 @@
 
 <script>
 import {getCaptcha} from "@/api/api";
+import {mapActions} from "vuex";
+import {Message} from "element-ui";
 
 export default {
   name: "AccountLogin",
@@ -47,7 +49,7 @@ export default {
       checkKey: '',
       // 登录类型（0，用户名登录（默认）；1，手机号登录）
       loginType: 0,
-      // 登录按钮加载状态
+      // 登录按钮
       loading: false,
       // 表单验证规则
       verifyRules: {
@@ -65,6 +67,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['Login']),
 
     /**
      * 判断登录方式为用户名或手机号
@@ -109,11 +112,23 @@ export default {
           this.loading = true
 
           let loginModel = {
+            type: this.loginType,
             account: this.loginInfo.account,
             password: this.loginInfo.password,
             captcha: this.loginInfo.captcha,
             checkKey: this.checkKey
           }
+          this.Login(loginModel).then(res => {
+            // 登录成功
+            this.$router.push({path: '/'})
+            this.$notify.success({title: '欢迎', message: '登录成功'})
+          }).catch(err => {
+            // 登录错误刷新验证码
+            this.handleCaptcha()
+            this.loading = false;
+            // 错误提示
+            this.$notify.error({title: '错误', message: err.message})
+          })
         }
       })
     }
