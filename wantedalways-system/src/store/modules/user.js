@@ -39,7 +39,12 @@ const user = {
           reject(err)
         })
       })
-    }
+    },
+
+    /**
+     * 退出登录
+     */
+    Logout() {}
   }
 }
 
