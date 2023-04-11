@@ -10,4 +10,9 @@ export const getCaptcha = (checkKey) => get('/sys/login/getCaptcha',{'key': chec
  */
 export const accountLogin = (loginModel) => post('/sys/login/accountLogin', loginModel)
 
+/**
+ * 退出登录
+ */
+export const logout = () => post('/sys/login/logout')
+
 

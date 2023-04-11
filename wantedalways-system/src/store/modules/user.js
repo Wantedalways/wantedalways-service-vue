@@ -1,6 +1,7 @@
-import {accountLogin} from "@/api/api";
+import {accountLogin, logout} from "@/api/api";
 import Vue from "vue";
 import {ACCESS_TOKEN, USER_INFO} from "@/store/mutation-types";
+import {Notification} from "element-ui";
 
 const user = {
   state: {
@@ -44,7 +45,28 @@ const user = {
     /**
      * 退出登录
      */
-    Logout() {}
+    Logout({ commit }) {
+      return new Promise((resolve, reject) => {
+        logout().then(res => {
+          if (res.code === 500) {
+            Notification({
+              type: 'error',
+              title: '错误',
+              message: res.message
+            })
+            reject(res)
+          }
+          resolve(res)
+        }).catch(err => {
+          reject(err)
+        });
+
+        Vue.ls.remove(ACCESS_TOKEN)
+        Vue.ls.remove(USER_INFO);
+        commit('SET_TOKEN', '')
+        commit('SET_USER_INFO', '')
+      })
+    }
   }
 }
 
