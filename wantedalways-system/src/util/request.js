@@ -13,7 +13,7 @@ const service = axios.create({
 service.interceptors.request.use(config => {
   const token = Vue.ls.get(ACCESS_TOKEN)
   if (token) {
-    config.headers[ACCESS_TOKEN] = token
+    config.headers['Access-Token'] = token
   }
 
   return config

@@ -27,10 +27,10 @@ const user = {
             const result = res.data
             const userInfo = result.sysUser
 
-            Vue.ls.set(ACCESS_TOKEN, res.token, 7 * 24 * 60 * 60 * 1000)
+            Vue.ls.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000)
             Vue.ls.set(USER_INFO, userInfo, 7 * 24 * 60 * 60 * 1000)
 
-            commit('SET_TOKEN', res.token)
+            commit('SET_TOKEN', result.token)
             commit('SET_USER_INFO', userInfo)
             resolve(res)
           } else {
@@ -51,20 +51,21 @@ const user = {
           if (res.code === 500) {
             Notification({
               type: 'error',
-              title: '错误',
+              title: '系统提示',
               message: res.message
             })
             reject(res)
+          } else {
+            resolve(res)
+
+            Vue.ls.remove(ACCESS_TOKEN)
+            Vue.ls.remove(USER_INFO);
+            commit('SET_TOKEN', '')
+            commit('SET_USER_INFO', '')
           }
-          resolve(res)
         }).catch(err => {
           reject(err)
         });
-
-        Vue.ls.remove(ACCESS_TOKEN)
-        Vue.ls.remove(USER_INFO);
-        commit('SET_TOKEN', '')
-        commit('SET_USER_INFO', '')
       })
     }
   }
