@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="footer">
-      Copyright &copy; 2023 <a href="https://www.wantedalways.cn" target="_blank">Wantedalways</a> 出品
+      <el-link type="info" href="https://www.wantedalways.cn" target="_blank">Copyright &copy; 2023 Wantedalways</el-link>
     </div>
   </div>
 </template>

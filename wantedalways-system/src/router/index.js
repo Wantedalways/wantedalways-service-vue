@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Layout from "@/layout/index.vue";
+import BaseLayout from "@/layout/BaseLayout.vue";
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    component: Layout,
+    component: BaseLayout,
   },
   {
     path: '/login',
