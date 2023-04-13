@@ -10,8 +10,8 @@ const routes = [
     component: BaseLayout,
   },
   {
-    path: '/login',
-    name: 'login',
+    path: '/login/accountLogin',
+    name: 'accountLogin',
     component: () => import('@/views/login/Login.vue')
   }
 ]

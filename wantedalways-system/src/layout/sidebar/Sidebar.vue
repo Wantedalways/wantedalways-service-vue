@@ -1,11 +1,10 @@
 <template>
-  <el-aside class="sidebar">
-    aside
-    <div @click="collapseMenu">
-      <el-image :src="require('@/assets/logo-s.png')" class="logo"/>
-      <span class="title" v-show="!collapse">手术器械</span>
+  <el-aside class="sidebar" :width="isCollapse ? '64px' : '250px'">
+    <div class="aside-header">
+      <el-image :src="require('@/assets/logo-简-黑白.png')" class="logo"/>
+      <span class="title" v-show="!isCollapse">手术器械</span>
     </div>
-    <el-menu class="side-menu" :collapse="collapse">
+    <el-menu class="side-menu" :collapse="isCollapse">
       <el-menu-item index="1">
         <i class="el-icon-s-home"></i>
         <span slot="title">首页</span>
@@ -36,36 +35,56 @@ export default {
   name: "Sidebar",
   data() {
     return {
-      collapse: false
+
+    }
+  },
+  props: {
+    isCollapse: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
-    collapseMenu() {
-      this.collapse = !this.collapse
-    }
+
   }
 }
 </script>
 
 <style scoped>
+.aside-header {
+  height: 50px;
+  background-color: #416891
+}
+
 .logo {
-  width: 64px;
+  height: 35px;
+  margin-left: 18px;
+  margin-top: 5px;
 }
 
 .title {
-  font-size: 20px;
-  color: #304156;
+  font-size: 25px;
+  color: #a7bdd7;
   font-weight: 600;
   position: relative;
-  bottom: 10px;
+  bottom: 7px;
+  margin-left: 10px;
 }
 
 .side-menu:not(.el-menu--collapse) {
-  width: 200px;
-  height: 100%;
+  width: 250px;
+}
+
+.side-menu {
+  border: none;
+  background-color: #bacbe0;
 }
 
 .sidebar {
   height: 100%;
+  max-width: 250px;
+  background-color: #bacbe0;
+  transition: all .4s;
+  overflow-x: hidden;
 }
 </style>

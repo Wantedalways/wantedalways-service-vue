@@ -15,4 +15,9 @@ export const accountLogin = (loginModel) => post('/sys/login/accountLogin', logi
  */
 export const logout = () => post('/sys/login/logout')
 
+/**
+ * 获取当前用户权限列表
+ */
+export const getPermissionList = () => get('/sys/permission/getPermissionList')
+
 
